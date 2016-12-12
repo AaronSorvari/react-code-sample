@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Paper from 'material-ui/Paper';
 import selectors from '../../selectors/entitySelectors';
 import style from './column.scss';
 import Card from '../../components/Card/Card';
@@ -14,14 +15,14 @@ class Column extends React.Component {
         const cardList = cardIdList.map(id => <Card cardId={id} key={id} />);
 
         return (
-            <div className={style.column}>
-                <div>
+            <Paper className={style.column}>
+                <h2>
                     {this.props.column.label}
-                </div>
-                <div>
+                </h2>
+                <div className={style.content}>
                     {cardList}
                 </div>
-            </div>
+            </Paper>
         );
     }
 }

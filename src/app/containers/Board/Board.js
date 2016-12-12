@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import AppBar from 'material-ui/AppBar';
 import selectors from '../../selectors/entitySelectors';
 // import { bindActionCreators } from 'redux';
 import style from './board.scss';
@@ -15,9 +16,9 @@ class Board extends React.Component {
         const columnList = columnIdList.map(id => <Column columnId={id} key={id} />);
 
         return (
-            <div className={style.board}>
-                <div>{this.props.board.boardName}</div>
-                <div>
+            <div className={style.wrapper}>
+                <AppBar className={style.appbar} title={this.props.board.boardName} />
+                <div className={style.content}>
                     {columnList}
                 </div>
             </div>

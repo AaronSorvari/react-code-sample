@@ -1,8 +1,13 @@
 /* src/entry/style/global/_container.scss */
 
 :global {
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
     .container {
         position: relative;
+        height: 100%;
         width: 100%;
     }
 }

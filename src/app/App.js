@@ -4,10 +4,14 @@ import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import configureStore from './store/configureStore';
 import routes from './routes';
 import AppActions from './actions/AppActions';
+
+injectTapEventPlugin();
 
 let store;
 let history;
@@ -26,9 +30,11 @@ const App = {
         // render aplication
         ReactDOM.render(
             <AppContainer key={Math.random()}>
-                <Provider store={store}>
-                    <Router history={history}>{routes}</Router>
-                </Provider>
+                <MuiThemeProvider>
+                    <Provider store={store}>
+                        <Router history={history}>{routes}</Router>
+                    </Provider>
+                </MuiThemeProvider>
             </AppContainer>,
             document.getElementById('container')
         );

@@ -1,5 +1,13 @@
 /* src/app/components/Column/column.scss */
 
 .column {
-    display: inline-block;
+    width: 400px;
+    margin: 5px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
 }

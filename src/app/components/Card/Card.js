@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Paper from 'material-ui/Paper';
 import selectors from '../../selectors/entitySelectors';
 import style from './card.scss';
 
@@ -10,11 +11,11 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className={style.card}>
-                <div>
+            <Paper className={style.card} zDepth={2}>
+                <h3>
                     {this.props.card.title}
-                </div>
-            </div>
+                </h3>
+            </Paper>
         );
     }
 }
