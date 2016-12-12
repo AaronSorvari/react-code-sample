@@ -1,5 +1,7 @@
+import { normalize, arrayOf } from 'normalizr';
 import ActionTypes from '../constants/ActionTypes';
-// import WebAPIUtils from '../utils/WebAPIUtils';
+import WebAPIUtils from '../utils/WebAPIUtils';
+import WebAPISchema from '../utils/WebAPISchema';
 
 /**
  * App actions
@@ -12,9 +14,19 @@ const AppActions = {
      *
      * @return {Object}
      */
-    initialize() {
+    initialize(entities) {
         return {
-            type: ActionTypes.INITIALIZE
+            type: ActionTypes.INITIALIZE,
+            entities
+        };
+    },
+
+    initializeAsync() {
+        return function thunk(dispatch) {
+            return WebAPIUtils.getBoardData().then((boardArray) => {
+                const normalizedData = normalize(boardArray, arrayOf(WebAPISchema.board));
+                dispatch(AppActions.initialize(normalizedData.entities));
+            });
         };
     },
 

@@ -4,6 +4,11 @@
  * @type {Object}
  */
 const InitialState = {
+    entities: {
+        board: {},
+        column: {},
+        card: {}
+    },
     template: 0
 };
 
