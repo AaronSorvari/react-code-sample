@@ -1,9 +1,6 @@
 import ActionTypes from '../constants/ActionTypes';
 import InitialState from '../constants/InitialState';
 
-/**
- * Template reducer, increment state
- */
 export default function entityReducer(state = InitialState.entities, action) {
     switch (action.type) {
         case ActionTypes.INITIALIZE:

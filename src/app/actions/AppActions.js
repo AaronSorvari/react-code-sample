@@ -100,38 +100,6 @@ const AppActions = {
                 }, 500);
             });
         };
-    },
-
-    /**
-     * Placeholder action (example)
-     *
-     * @param  {number} inc increment value
-     *
-     * @return {Object}
-     */
-    placeholder(inc) {
-        return {
-            type: ActionTypes.PLACEHOLDER,
-            inc
-        };
-    },
-
-    /**
-     * Example of async action
-     *
-     * @param  {number} inc increment value
-     *
-     * @return {Function}
-     */
-    placeholderAsync(inc) {
-        return function thunk(dispatch) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    dispatch(AppActions.placeholder(inc));
-                    resolve();
-                }, 500);
-            });
-        };
     }
 };
 

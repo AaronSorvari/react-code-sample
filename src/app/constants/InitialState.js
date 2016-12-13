@@ -11,8 +11,7 @@ const InitialState = {
     },
     modal: {
         stack: []
-    },
-    template: 0
+    }
 };
 
 export default InitialState;
