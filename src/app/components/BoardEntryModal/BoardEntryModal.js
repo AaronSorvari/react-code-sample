@@ -35,8 +35,14 @@ class BoardEntryModal extends React.Component {
     handleSave() {
         const boardName = this.state.boardName;
 
-        this.props.actions.addBoardAsync({ boardName }).then(() => {
-            this.props.actions.hideModal({ modalId: this.props.id });
+        this.props.actions.showConfirmModal({
+            title: 'Confirm',
+            content: `Are you sure you want to create the board "${boardName}"?`,
+            confirmAction: () => {
+                this.props.actions.addBoardAsync({ boardName }).then(() => {
+                    this.props.actions.hideModal({ modalId: this.props.id });
+                });
+            }
         });
     }
 
