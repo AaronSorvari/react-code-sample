@@ -9,6 +9,9 @@ const InitialState = {
         column: {},
         card: {}
     },
+    modal: {
+        stack: []
+    },
     template: 0
 };
 

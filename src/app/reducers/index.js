@@ -3,6 +3,7 @@ import { routerReducer as routing } from 'react-router-redux';
 
 import template from './templateReducer';
 import entities from './entityReducer';
+import modal from './modalReducer';
 
 /**
  * Combine reducers
@@ -10,6 +11,7 @@ import entities from './entityReducer';
 const rootReducer = combineReducers({
     template,
     entities,
+    modal,
     routing
 });
 

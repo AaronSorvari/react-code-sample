@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import AppBar from 'material-ui/AppBar';
 import selectors from '../../selectors/entitySelectors';
-// import { bindActionCreators } from 'redux';
+import AppActions from '../../actions/AppActions';
 import style from './board.scss';
 import Column from '../../components/Column/Column';
 
@@ -12,8 +13,9 @@ class Board extends React.Component {
     };
 
     render() {
+        const boardId = this.props.board.boardId;
         const columnIdList = this.props.board.columns || [];
-        const columnList = columnIdList.map(id => <Column columnId={id} key={id} />);
+        const columnList = columnIdList.map(id => <Column columnId={id} key={id} boardId={boardId} />);
 
         return (
             <div className={style.wrapper}>
@@ -27,7 +29,7 @@ class Board extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    const boardId = 0; // TODO: get from route
+    const boardId = 'default'; // TODO: get from route
     const board = selectors.getBoard(state, boardId) || {};
     return {
         board
@@ -35,7 +37,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-    return {};
+    return {
+        actions: bindActionCreators(AppActions, dispatch)
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

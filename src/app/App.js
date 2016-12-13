@@ -10,6 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import configureStore from './store/configureStore';
 import routes from './routes';
 import AppActions from './actions/AppActions';
+import MasterModal from './components/MasterModal/MasterModal';
 
 injectTapEventPlugin();
 
@@ -32,7 +33,10 @@ const App = {
             <AppContainer key={Math.random()}>
                 <MuiThemeProvider>
                     <Provider store={store}>
-                        <Router history={history}>{routes}</Router>
+                        <div>
+                            <Router history={history}>{routes}</Router>
+                            <MasterModal />
+                        </div>
                     </Provider>
                 </MuiThemeProvider>
             </AppContainer>,
@@ -51,9 +55,14 @@ if (module.hot) {
 
         ReactDOM.render(
             <AppContainer key={Math.random()}>
-                <Provider store={store}>
-                    <Router history={history}>{nextRoutes}</Router>
-                </Provider>
+                <MuiThemeProvider>
+                    <Provider store={store}>
+                        <div>
+                            <Router history={history}>{nextRoutes}</Router>
+                            <MasterModal />
+                        </div>
+                    </Provider>
+                </MuiThemeProvider>
             </AppContainer>,
             document.getElementById('container')
         );
