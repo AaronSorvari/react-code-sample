@@ -60,6 +60,12 @@ const AppActions = {
         };
     },
 
+    showBoardEntryModal() {
+        return {
+            type: ActionTypes.SHOW_BOARD_ENTRY_MODAL
+        };
+    },
+
     showColumnEntryModal({ boardId }) {
         return {
             type: ActionTypes.SHOW_COLUMN_ENTRY_MODAL,

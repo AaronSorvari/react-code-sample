@@ -1,5 +1,10 @@
 
 const selectors = {
+    getAllBoards(state) {
+        const entities = state.entities;
+        return Object.values(entities.board);
+    },
+
     getBoard(state, boardId) {
         const entities = state.entities;
         return entities.board[boardId];

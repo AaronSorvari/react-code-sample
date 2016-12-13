@@ -5,10 +5,9 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import AppActions from '../../actions/AppActions';
 
-class ColumnEntryModal extends React.Component {
+class BoardEntryModal extends React.Component {
     static propTypes = {
         id: PropTypes.any.isRequired,
-        boardId: PropTypes.string.isRequired,
         actions: PropTypes.object.isRequired,
         open: PropTypes.bool.isRequired
     };
@@ -17,16 +16,16 @@ class ColumnEntryModal extends React.Component {
         super(props, context);
 
         this.state = {
-            columnLabel: 'New Column'
+            boardName: 'New Board'
         };
 
-        this.handleColumnLabelChange = this.handleColumnLabelChange.bind(this);
+        this.handleBoardNameChange = this.handleBoardNameChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
 
-    handleColumnLabelChange(event) {
-        this.setState({ columnLabel: event.target.value });
+    handleBoardNameChange(event) {
+        this.setState({ boardName: event.target.value });
     }
 
     handleClose() {
@@ -34,10 +33,9 @@ class ColumnEntryModal extends React.Component {
     }
 
     handleSave() {
-        const boardId = this.props.boardId;
-        const columnLabel = this.state.columnLabel;
+        const boardName = this.state.boardName;
 
-        this.props.actions.addColumnToBoardAsync({ boardId, columnLabel }).then(() => {
+        this.props.actions.addBoardAsync({ boardName }).then(() => {
             this.props.actions.hideModal({ modalId: this.props.id });
         });
     }
@@ -59,15 +57,15 @@ class ColumnEntryModal extends React.Component {
 
         return (
             <Dialog
-                title="New Column"
+                title="New Board"
                 actions={actions}
                 modal={false}
                 open={this.props.open}
                 onRequestClose={this.handleClose}
             >
                 <form onSubmit={this.handleSave}>
-                    <label htmlFor={`ColumnLabel${this.props.id}`}>Name:</label>
-                    <input type="text" id={`ColumnLabel${this.props.id}`} value={this.state.columnLabel} onChange={this.handleColumnLabelChange} />
+                    <label htmlFor={`BoardName${this.props.id}`}>Name:</label>
+                    <input type="text" id={`BoardName${this.props.id}`} value={this.state.boardName} onChange={this.handleBoardNameChange} />
                 </form>
             </Dialog>
         );
@@ -84,4 +82,4 @@ function mapDispatchToProps(dispatch, ownProps) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ColumnEntryModal);
+export default connect(mapStateToProps, mapDispatchToProps)(BoardEntryModal);

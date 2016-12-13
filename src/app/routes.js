@@ -7,7 +7,7 @@ import Board from './containers/Board/Board';
  * Define routes
  */
 const routes = (
-    <Route path="/" component={Board}>
+    <Route path="/(:boardId)" component={Board}>
         <Redirect from="*" to="/" />
     </Route>
 );
