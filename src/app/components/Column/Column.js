@@ -32,8 +32,10 @@ class Column extends React.Component {
     }
 
     render() {
+        const columnId = this.props.columnId;
+        const boardId = this.props.boardId;
         const cardIdList = this.props.column.cards || [];
-        const cardList = cardIdList.map(id => <Card cardId={id} key={id} />);
+        const cardList = cardIdList.map(id => <Card cardId={id} key={id} columnId={columnId} boardId={boardId} />);
 
         return (
             <Paper className={style.column}>

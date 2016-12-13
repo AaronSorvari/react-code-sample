@@ -1,23 +1,23 @@
 
 const selectors = {
     getAllBoards(state) {
-        const entities = state.entities;
-        return Object.values(entities.board);
+        const boards = state.entities.board || {};
+        return Object.values(boards);
     },
 
     getBoard(state, boardId) {
-        const entities = state.entities;
-        return entities.board[boardId];
+        const boards = state.entities.board || {};
+        return boards[boardId];
     },
 
     getColumn(state, columnId) {
-        const entities = state.entities;
-        return entities.column[columnId];
+        const columns = state.entities.column || {};
+        return columns[columnId];
     },
 
     getCard(state, cardId) {
-        const entities = state.entities;
-        return entities.card[cardId];
+        const cards = state.entities.card || {};
+        return cards[cardId];
     }
 };
 

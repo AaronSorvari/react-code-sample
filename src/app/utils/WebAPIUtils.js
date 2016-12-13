@@ -102,7 +102,7 @@ const WebAPIUtils = {
         const board = data.find(x => x.boardId === boardId);
         const column = board.columns.find(x => x.columnId === columnId);
         const cardIndex = column.cards.findIndex(x => x.cardId === cardId);
-        board.columns.splice(cardIndex, 1);
+        column.cards.splice(cardIndex, 1);
         localStoragePersistence.setData(data);
 
         return new Promise(resolve => resolve());
