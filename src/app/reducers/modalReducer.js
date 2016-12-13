@@ -40,6 +40,20 @@ export default function modalReducer(state = InitialState.modal, action) {
                 const newStack = immutablePush(state.stack, modal);
                 return { stack: newStack };
             }
+        case ActionTypes.SHOW_COLUMN_ENTRY_MODAL:
+            {
+                const modal = {
+                    componentName: 'ColumnEntryModal',
+                    id: uuid.v4(),
+                    open: true,
+                    props: {
+                        boardId: action.boardId
+                    }
+                };
+
+                const newStack = immutablePush(state.stack, modal);
+                return { stack: newStack };
+            }
         case ActionTypes.HIDE_MODAL:
             {
                 const id = action.modalId;

@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 
 import selectors from '../../selectors/modalSelectors';
 import CardEntryModal from '../../components/CardEntryModal/CardEntryModal';
+import ColumnEntryModal from '../../components/ColumnEntryModal/ColumnEntryModal';
 
 const availableModalComponents = {
-    CardEntryModal
+    CardEntryModal,
+    ColumnEntryModal
 };
 
 function createModalComponent(componentName, id, open, props) {
