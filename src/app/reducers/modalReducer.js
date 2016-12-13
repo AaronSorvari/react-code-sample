@@ -25,6 +25,26 @@ function immutableRemove(array, id) {
 
 export default function modalReducer(state = InitialState.modal, action) {
     switch (action.type) {
+        case ActionTypes.SHOW_CONFIRM_MODAL:
+            {
+                const modal = {
+                    componentName: 'ConfirmModal',
+                    id: uuid.v4(),
+                    open: true,
+                    props: {
+                        title: action.title,
+                        content: action.content,
+                        confirmLabel: action.confirmLabel,
+                        cancelLabel: action.cancelLabel,
+                        confirmAction: action.confirmAction,
+                        cancelAction: action.cancelAction
+                    }
+                };
+
+                const newStack = immutablePush(state.stack, modal);
+                return { stack: newStack };
+            }
+
         case ActionTypes.SHOW_CARD_ENTRY_MODAL:
             {
                 const modal = {

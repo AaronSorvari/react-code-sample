@@ -2,6 +2,19 @@
 import uuid from 'node-uuid';
 import localStoragePersistence from './localStoragePersistence';
 
+function getBoardId(boardName, data) {
+    const slugBase = boardName.replace(/[^A-Za-z0-9-]+/, '-');
+    let slug = slugBase;
+    let increment = 1;
+    const findExistingBoardPredicate = x => x.boardId === slug;
+    while (data.find(findExistingBoardPredicate)) {
+        increment += 1;
+        slug = `${slugBase}-${increment}`;
+    }
+
+    return slug;
+}
+
 const WebAPIUtils = {
     getBoardData: () => new Promise((resolve) => {
         const data = localStoragePersistence.getData();
@@ -10,13 +23,13 @@ const WebAPIUtils = {
 
     addBoard: ({ boardName }) => {
         // TODO: Create REST endpoint
+        const data = localStoragePersistence.getData();
         const board = {
-            boardId: uuid.v4(),
+            boardId: getBoardId(boardName, data),
             boardName,
             columns: []
         };
 
-        const data = localStoragePersistence.getData();
         data.push(board);
         localStoragePersistence.setData(data);
 
@@ -60,6 +73,39 @@ const WebAPIUtils = {
         return new Promise((resolve) => {
             resolve(card);
         });
+    },
+
+    deleteBoard: ({ boardId }) => {
+        // TODO: Create REST endpoint
+        const data = localStoragePersistence.getData();
+        const boardIndex = data.findIndex(x => x.boardId === boardId);
+        data.splice(boardIndex, 1);
+        localStoragePersistence.setData(data);
+
+        return new Promise(resolve => resolve());
+    },
+
+    deleteColumn: ({ boardId, columnId }) => {
+        // TODO: Create REST endpoint
+        const data = localStoragePersistence.getData();
+        const board = data.find(x => x.boardId === boardId);
+        const columnIndex = board.columns.findIndex(x => x.columnId === columnId);
+        board.columns.splice(columnIndex, 1);
+        localStoragePersistence.setData(data);
+
+        return new Promise(resolve => resolve());
+    },
+
+    deleteCard: ({ boardId, columnId, cardId }) => {
+        // TODO: Create REST endpoint
+        const data = localStoragePersistence.getData();
+        const board = data.find(x => x.boardId === boardId);
+        const column = board.columns.find(x => x.columnId === columnId);
+        const cardIndex = column.cards.findIndex(x => x.cardId === cardId);
+        board.columns.splice(cardIndex, 1);
+        localStoragePersistence.setData(data);
+
+        return new Promise(resolve => resolve());
     }
 };
 

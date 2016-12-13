@@ -5,11 +5,13 @@ import selectors from '../../selectors/modalSelectors';
 import CardEntryModal from '../../components/CardEntryModal/CardEntryModal';
 import ColumnEntryModal from '../../components/ColumnEntryModal/ColumnEntryModal';
 import BoardEntryModal from '../../components/BoardEntryModal/BoardEntryModal';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
 const availableModalComponents = {
     CardEntryModal,
     ColumnEntryModal,
-    BoardEntryModal
+    BoardEntryModal,
+    ConfirmModal
 };
 
 function createModalComponent(componentName, id, open, props) {

@@ -5,7 +5,7 @@ const localStorage = window.localStorage;
 const defaultData = [
     {
         boardId: 'default',
-        boardName: 'DIY Kanban Board',
+        boardName: 'Default',
         columns: [
             {
                 columnId: uuid.v4(),

@@ -1,4 +1,5 @@
 import { normalize, arrayOf } from 'normalizr';
+import { browserHistory } from 'react-router';
 import ActionTypes from '../constants/ActionTypes';
 import WebAPIUtils from '../utils/WebAPIUtils';
 import WebAPISchema from '../utils/WebAPISchema';
@@ -35,7 +36,10 @@ const AppActions = {
             return WebAPIUtils.addBoard({ boardName }).then((result) => {
                 // Quick implementation: reload all data
                 // TODO: Only update the data that changed
-                dispatch(AppActions.initializeAsync());
+                dispatch(AppActions.initializeAsync()).then(() => {
+                    const newBoardId = result.boardId;
+                    browserHistory.push(`/${newBoardId}`);
+                });
             });
         };
     },
@@ -57,6 +61,48 @@ const AppActions = {
                 // TODO: Only update the data that changed
                 dispatch(AppActions.initializeAsync());
             });
+        };
+    },
+
+    deleteBoardAsync({ boardId }) {
+        return function thunk(dispatch) {
+            return WebAPIUtils.deleteBoard({ boardId }).then((result) => {
+                // Quick implementation: reload all data
+                // TODO: Only update the data that changed
+                dispatch(AppActions.initializeAsync());
+            });
+        };
+    },
+
+    deleteColumnAsync({ boardId, columnId }) {
+        return function thunk(dispatch) {
+            return WebAPIUtils.deleteColumn({ boardId, columnId }).then((result) => {
+                // Quick implementation: reload all data
+                // TODO: Only update the data that changed
+                dispatch(AppActions.initializeAsync());
+            });
+        };
+    },
+
+    deleteCardAsync({ boardId, columnId, cardId }) {
+        return function thunk(dispatch) {
+            return WebAPIUtils.deleteCard({ boardId, columnId, cardId }).then((result) => {
+                // Quick implementation: reload all data
+                // TODO: Only update the data that changed
+                dispatch(AppActions.initializeAsync());
+            });
+        };
+    },
+
+    showConfirmModal({ title, content, confirmLabel, cancelLabel, confirmAction, cancelAction }) {
+        return {
+            type: ActionTypes.SHOW_CONFIRM_MODAL,
+            title,
+            content,
+            confirmLabel,
+            cancelLabel,
+            confirmAction,
+            cancelAction
         };
     },
 

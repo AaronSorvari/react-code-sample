@@ -30,6 +30,7 @@ class Board extends React.Component {
 
         this.handleAddBoard = this.handleAddBoard.bind(this);
         this.handleAddColumn = this.handleAddColumn.bind(this);
+        this.handleDeleteBoard = this.handleDeleteBoard.bind(this);
     }
 
     handleAddBoard() {
@@ -41,8 +42,22 @@ class Board extends React.Component {
         this.props.actions.showColumnEntryModal({ boardId });
     }
 
+    handleDeleteBoard() {
+        const boardId = this.props.board.boardId;
+        const boardName = this.props.board.boardName;
+
+        this.props.actions.showConfirmModal({
+            title: 'Confirm',
+            content: `Are you sure you want to delete the board "${boardName}"?`,
+            confirmAction: () => {
+                this.props.actions.deleteBoardAsync({ boardId });
+            }
+        });
+    }
+
     render() {
         const boardId = this.props.board.boardId;
+        const isDefaultBoard = this.props.board.boardId === 'default';
         const columnIdList = this.props.board.columns || [];
         const columnList = columnIdList.map(id => <Column columnId={id} key={id} boardId={boardId} />);
 
@@ -53,6 +68,8 @@ class Board extends React.Component {
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             >
                 <MenuItem primaryText="Add Column" onClick={this.handleAddColumn} />
+                <Divider />
+                <MenuItem primaryText="Delete Current Board" onClick={this.handleDeleteBoard} disabled={isDefaultBoard} />
             </IconMenu>
         );
 
